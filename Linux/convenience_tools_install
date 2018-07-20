@@ -1,0 +1,107 @@
+echo "
+                           .     .
+                        .  |\-^-/|  .    
+                       /| } O.=.O { |\ 
+                      /´ \ \_ ~ _/ / \`\ 
+                    /´ |  \-/ ~ \-/  | \`\ 
+                    |   |  /\\\\ //\  |   | 
+                     \|\|\/-\"\"-\"\"-\/|/|/
+                             ______/ /
+                             '------'
+                _   _        _  ___                         
+      _ __  ___| |_| |_ _  _| ||   \ _ _ __ _ __ _ ___ _ _  
+     | '  \/ -_)  _| ' \ || | || |) | '_/ _\` / _\` / _ \ ' \ 
+     |_|_|_\___|\__|_||_\_, |_||___/|_| \__,_\__, \___/_||_|
+                        |__/                 |___/          
+     -------------------------------------------------------
+                   github.com/methylDragon
+
+[CONVENIENCE TOOLS INSTALL SCRIPT]
+
+INSTALLS
+--------
+- Git
+- Terminator (Super efficient terminal emulator)
+- methylT3RM1N4T0R Profile
+- Nano (Lightweight command line editor!)
+"
+
+read -p "[Press enter to continue]"
+
+
+# Install git
+echo -e "\n== INSTALLING GIT =="
+sudo apt-get install git -y > /dev/null
+echo "Git installed!"
+
+# Get Terminator Repo
+
+echo -e "\n== ACCESSING T3RM1N4T0R REPOSITORY =="
+sudo add-apt-repository ppa:gnome-terminator -y
+sudo apt-get update > /dev/null
+
+
+# Install Terminator
+
+echo -e "\n== INSTALLING T3RM1N4T0R =="
+sudo apt-get install terminator wget -y > /dev/null
+
+echo "Terminator installed! Configuring now..."
+
+
+# Download and Install Terminator config file
+
+mkdir -p ~/.config/terminator
+cd ~/.config/terminator
+sudo wget -q https://raw.githubusercontent.com/methylDragon/fun-stuff/master/Terminator%20Settings/terminator/config -O config
+
+cd - > /dev/null
+
+
+# Get Nano (My favourite terminal editor)
+
+echo -e "\n== Installing Nano =="
+sudo apt-get install nano -y > /dev/null
+echo "Done!"
+
+
+# Cowsay and Fortune!!
+
+echo -e "\nHatching easter eggs...\n"
+
+sudo apt-get -qq install cowsay fortune -y
+
+cd /usr/share/cowsay/cows
+sudo wget -q https://raw.githubusercontent.com/methylDragon/fun-stuff/master/cowsay/methylDragon/methyldragon.cow -O methyldragon.cow
+sudo wget -q https://raw.githubusercontent.com/methylDragon/fun-stuff/master/cowsay/methylDragon/methylhalf.cow -O methylhalf.cow
+
+cd - > /dev/null
+
+
+# Append to ~/.bashrc if not already in
+
+declare -a file_appends=(
+  'alias methyl="fortune | cowsay -f methyldragon"'
+  'alias methylhalf="fortune | cowthink -f methylhalf"'
+)
+
+target_file="$HOME/.bashrc"
+
+for i in "${file_appends[@]}" ; do
+  if ! grep -Fxq "$i" "$target_file" ; then
+    echo "$i" >> "$target_file"
+  else
+    :
+  fi
+done
+
+
+# CH3EERS!
+
+cowsay -f methylhalf "We're done here!
+CH3EERS! Call me again any time with methyl or methylhalf!"
+
+
+# Restart bash to source ~/.bashrc
+
+exec bash
