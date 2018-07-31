@@ -24,7 +24,7 @@ WARNINGS
 
 Here's a guide: https://www.tecmint.com/create-a-linux-swap-file/
 
-Then type "ok" to continue
+Then type 'ok' and press enter to continue
 
 
 INSTALLS
@@ -41,17 +41,16 @@ https://github.com/linorobot/linorobot
 Author: github.com/methylDragon
 "
 
-while [ -z "$platform" ]; do
-  read -p "Please read the warning" answer
+while [ -z "$warning_read" ]; do
+  read -p "Please read the warning: " answer
 
   case "$answer" in
-    [Rr]|[Rr]obot) platform="ROBOT" ;;
-    [Cc]|[Cc]omputer) platform="COMPUTER" ;;
-    *) echo -e "\nInvalid response!\nPlease choose [r]obot or [c]omputer!\n" ;;
+    [Oo][Kk]) warning_read="TRUE" ;;
+    *) echo -e "\nInvalid response!\n" ;;
   esac
 done
 
-read -p "Press [enter] to confirm"
+echo -e "\n-- INITIALISING INSTALL --"
 
 # USER PROMPT FOR PLATFORM
 
@@ -63,7 +62,7 @@ Type your choice and press [enter]: " answer
   case "$answer" in
     [Rr]|[Rr]obot) platform="ROBOT" ;;
     [Cc]|[Cc]omputer) platform="COMPUTER" ;;
-    *) echo -e "\nInvalid response!\nPlease choose [r]obot or [c]omputer!\n" ;;
+    *) echo -e "\nInvalid response!\nPlease choose [r]obot or [c]omputer!" ;;
   esac
 done
 
