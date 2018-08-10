@@ -26,7 +26,7 @@ INSTALLS
 - Nano (Lightweight command line editor!)
 "
 
-read -p "[Press enter to continue]"
+read -p "Press [enter] to continue"
 
 
 # Install git
