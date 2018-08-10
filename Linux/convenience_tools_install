@@ -28,6 +28,11 @@ INSTALLS
 
 read -p "Press [enter] to continue"
 
+# Install apt deps
+
+sudo apt-get update > /dev/null
+sudo apt-get install software-properties-common -y
+
 
 # Install git
 echo -e "\n== INSTALLING GIT =="
