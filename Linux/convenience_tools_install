@@ -24,6 +24,7 @@ INSTALLS
 - Terminator (Super efficient terminal emulator)
 - methylT3RM1N4T0R Profile
 - Nano (Lightweight command line editor!)
+- Gedit (Everyone loves notepad!)
 "
 
 read -p "Press [enter] to continue"
@@ -69,6 +70,11 @@ echo -e "\n== Installing Nano =="
 sudo apt-get install nano -y > /dev/null
 echo "Done!"
 
+# Get Gedit (Everyone loves notepad!)
+
+echo -e "\n== Installing Gedit =="
+sudo apt-get install gedit -y > /dev/null
+echo "Done!"
 
 # Cowsay and Fortune!!
 
