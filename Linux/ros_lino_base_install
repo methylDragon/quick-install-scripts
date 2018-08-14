@@ -50,6 +50,9 @@ while [ -z "$warning_read" ]; do
   esac
 done
 
+# Reset timer
+SECONDS=0
+
 echo -e "\n-- INITIALISING INSTALL --"
 
 # USER PROMPT FOR PLATFORM
@@ -282,6 +285,20 @@ http://linorobot.org (Linorobot stack setup)
 
              - ! CH3EERS ! -
 "
+
+# Print time elapsed
+if (( $SECONDS > 3600 )) ; then
+    let "hours=SECONDS/3600"
+    let "minutes=(SECONDS%3600)/60"
+    let "seconds=(SECONDS%3600)%60"
+    echo -e "\n\nCompleted in $hours hour(s), $minutes minute(s) and $seconds second(s)" 
+elif (( $SECONDS > 60 )) ; then
+    let "minutes=(SECONDS%3600)/60"
+    let "seconds=(SECONDS%3600)%60"
+    echo -e "\n\nCompleted in $minutes minute(s) and $seconds second(s)"
+else
+    echo -e "\n\nCompleted in $SECONDS seconds"
+fi
 
 # Restart bash to source ~/.bashrc and go back to the current path
 

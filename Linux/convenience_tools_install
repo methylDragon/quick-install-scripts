@@ -14,7 +14,7 @@ echo "
      |_|_|_\___|\__|_||_\_, |_||___/|_| \__,_\__, \___/_||_|
                         |__/                 |___/          
      -------------------------------------------------------
-                   github.com/methylDragon
+                     github.com/methylDragon
 
 [CONVENIENCE TOOLS INSTALL SCRIPT]
 
@@ -28,6 +28,9 @@ INSTALLS
 "
 
 read -p "Press [enter] to continue"
+
+# Reset timer
+SECONDS=0
 
 # Install apt deps
 
@@ -112,6 +115,20 @@ done
 cowsay -f methylhalf "We're done here!
 CH3EERS! Call me again any time with methyl or methylhalf!"
 
+
+# Print time elapsed
+if (( $SECONDS > 3600 )) ; then
+    let "hours=SECONDS/3600"
+    let "minutes=(SECONDS%3600)/60"
+    let "seconds=(SECONDS%3600)%60"
+    echo -e "\n\nCompleted in $hours hour(s), $minutes minute(s) and $seconds second(s)" 
+elif (( $SECONDS > 60 )) ; then
+    let "minutes=(SECONDS%3600)/60"
+    let "seconds=(SECONDS%3600)%60"
+    echo -e "\n\nCompleted in $minutes minute(s) and $seconds second(s)"
+else
+    echo -e "\n\nCompleted in $SECONDS seconds"
+fi
 
 # Restart bash to source ~/.bashrc
 
