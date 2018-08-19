@@ -18,7 +18,7 @@ The Robot Operating System (ROS) is a widely used framework and ecosystem for Ro
 
 WARNINGS
 --------
-- Please only run this on a computer with Ubuntu 16.04 or derivatives of Ubuntu 16.04!
+- Please only run this on a computer with Ubuntu 16.04/18.04 or derivatives!
 
 - If you're on a less powerful computer for your robot (like an Raspberry Pi), please ensure you create sufficient swap-space FIRST, otherwise the install -WILL- fail due to lack of RAM. 1-2GB should be sufficient.
 
@@ -29,13 +29,14 @@ Then type 'ok' and press [enter] to continue
 
 INSTALLS
 --------
-- ROS Kinetic (tailored to your uses)
+- ROS Kinetic/Melodic (tailored to your uses)
 - Linorobot (One of the many stacks for robot base essentials)
 
 MISC
 ----
 If you'd like to see how to install it yourself, see:
-http://wiki.ros.org/kinetic/Installation/Ubuntu
+http://wiki.ros.org/kinetic/Installation/Ubuntu (For 16.04)
+http://wiki.ros.org/melodic/Installation/Ubuntu (For 18.04)
 https://github.com/linorobot/linorobot
 
 Author: github.com/methylDragon
@@ -71,6 +72,24 @@ done
 
 echo -e "\n$platform selected\n"
 
+# CONFIGURE ROS DISTRIBUTION TO INSTALL
+
+ARCH=$(uname -i)
+RELEASE=$(lsb_release -c -s)
+
+if [ $RELEASE == "xenial" ]
+  then
+    ROSDISTRO=kinetic
+       
+elif [ $RELEASE == "bionic" ]
+  then
+    ROSDISTRO=melodic
+
+else
+  echo -e "There's no ROS Distro compatible for your platform :( Sorry!\nPlease make sure you have Ubuntu 16.04 or 18.04!"
+    exit 1
+fi
+
 echo -e "
                     /^\ 
                    |   |
@@ -83,7 +102,7 @@ echo -e "
               | /  \___/  \ |
               \/     V     \/
 
-== ROS kinetic installation initialising! ==
+== ROS $ROSDISTRO installation initialising! ==
 Preparing for groundbreaking robot stuff...
 "
 
@@ -93,22 +112,26 @@ Preparing for groundbreaking robot stuff...
 echo "Updating sources..."
 
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-sudo apt-get update > /dev/null
 
+wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+
+sudo apt-get update > /dev/null
+sudo apt-get -y install dpkg
 
 # Install the appropriate ROS
 
-echo -e "\n== INSTALLING ROS kinetic =="
+echo -e "\n== INSTALLING ROS $ROSDISTRO =="
 
 if [ "$platform" == 'COMPUTER' ]
 then
-  sudo apt-get -qq install ros-kinetic-desktop-full -y
-  echo "ROS Kinetic full pack installed"
+  sudo apt-get -qq install ros-$ROSDISTRO-desktop-full -y
+  echo "ROS $ROSDISTRO full pack installed"
 elif [ "$platform" == 'ROBOT' ]
 then
-  sudo apt-get -qq install ros-kinetic-ros-base -y
-  echo "ROS Kinetic lightweight (robot) pack installed"
+  sudo apt-get -qq install ros-$ROSDISTRO-ros-base -y
+  echo "ROS $ROSDISTRO lightweight (robot) pack installed"
 else
   echo "Something broke!"
   read -p "Exiting script... Try again!"
@@ -136,7 +159,7 @@ echo "DONE!"
 
 echo -e "\n== Setting up ROS environment =="
 
-source /opt/ros/kinetic/setup.bash
+source /opt/ros/$ROSDISTRO/setup.bash
 mkdir -p $HOME/catkin_ws/src
 cd $HOME/catkin_ws
 catkin_make
@@ -146,7 +169,7 @@ echo -e "\ncatkin_ws created"
 # Snippet to append to bashrc if not already in
 
 declare -a file_appends=(
-  'source /opt/ros/kinetic/setup.bash'
+  'source /opt/ros/$ROSDISTRO/setup.bash'
   'source ~/catkin_ws/devel/setup.bash'
 )
 
