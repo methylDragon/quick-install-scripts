@@ -25,6 +25,7 @@ INSTALLS
 - methylT3RM1N4T0R Profile
 - Nano (Lightweight command line editor!)
 - Gedit (Everyone loves notepad!)
+- net-tools and nmap
 "
 
 read -p "Press [enter] to continue"
@@ -77,6 +78,13 @@ echo "Done!"
 
 echo -e "\n== Installing Gedit =="
 sudo apt-get install gedit -y > /dev/null
+echo "Done!"
+
+# Get Gedit (Everyone loves notepad!)
+
+echo -e "\n== Installing net-tools and nmap =="
+echo "Time to be H4CK3RM4N"
+sudo apt-get install net-tools nmap -y > /dev/null
 echo "Done!"
 
 # Cowsay and Fortune!!
