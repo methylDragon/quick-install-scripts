@@ -169,7 +169,7 @@ echo -e "\ncatkin_ws created"
 # Snippet to append to bashrc if not already in
 
 declare -a file_appends=(
-  'source /opt/ros/$ROSDISTRO/setup.bash'
+  "source /opt/ros/$ROSDISTRO/setup.bash"
   'source ~/catkin_ws/devel/setup.bash'
 )
 
