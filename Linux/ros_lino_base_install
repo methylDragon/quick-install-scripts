@@ -288,6 +288,9 @@ cd .. && catkin_make
 # And laser filters!
 sudo apt-get install ros-$(rosversion -d)-laser-filters
 
+# Rebuild the ROS package tree
+rospack profile
+
 echo -e "\nDone!"
 
 echo "
