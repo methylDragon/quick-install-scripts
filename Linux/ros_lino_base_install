@@ -249,6 +249,7 @@ echo -e "\nTargeting install for $lino_sensor\n"
 
 echo -e "\n== BEGINNING LINOROBOT INSTALL ==\n"
 cd lino_install
+sed -i 's/set -e//g' install
 chmod +x install
 read -p "Please pay attention to the install log! Press [enter] to continue."
 ./install "$lino_robot_base" "$lino_sensor"
