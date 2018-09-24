@@ -35,8 +35,13 @@ SECONDS=0
 
 # Install apt deps
 
+echo -e "\n== UPDATING SOURCE LIST =="
+echo -e "\nThis will take awhile..."
+
 sudo apt-get update > /dev/null
 sudo apt-get install software-properties-common -y
+echo -e "\nDone!"
+
 
 
 # Install git
@@ -48,8 +53,9 @@ echo "Git installed!"
 
 echo -e "\n== ACCESSING T3RM1N4T0R REPOSITORY =="
 sudo add-apt-repository ppa:gnome-terminator -y
+echo -e "\nBe patient..."
 sudo apt-get update > /dev/null
-
+echo -e "\nDone!"
 
 # Install Terminator
 

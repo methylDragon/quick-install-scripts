@@ -123,6 +123,7 @@ sudo apt-get -y install dpkg
 # Install the appropriate ROS
 
 echo -e "\n== INSTALLING ROS $ROSDISTRO =="
+echo -e "\nPlease be patient! This can take quite a while... (5-30 minutes)"
 
 if [ "$platform" == 'COMPUTER' ]
 then
