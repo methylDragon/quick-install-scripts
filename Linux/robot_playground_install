@@ -59,11 +59,14 @@ cd ~/linorobot_ws/src
 echo -e "\n-- CLONING ROBOT PLAYGROUND REPOSITORY --"
 
 git clone https://github.com/grassjelly/robot_playground.git
-cd robot_playground
 
 echo -e "\n-- RESOLVING DEPENDENCIES --"
 
+cd robot_playground
+
 ./installdep
+
+cd ../
 
 git clone https://github.com/grassjelly/jackal.git
 git clone https://github.com/jackal/jackal_simulator.git
