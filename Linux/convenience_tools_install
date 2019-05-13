@@ -91,6 +91,7 @@ echo "Done!"
 echo -e "\n== Installing net-tools and nmap =="
 echo "Time to be H4CK3RM4N"
 sudo apt-get install net-tools nmap -y > /dev/null
+sudo apt-get install curl -y > /dev/null
 echo "Done!"
 
 # Cowsay and Fortune!!
