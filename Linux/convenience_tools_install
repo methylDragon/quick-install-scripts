@@ -86,7 +86,7 @@ echo -e "\n== Installing Gedit =="
 sudo apt-get install gedit -y > /dev/null
 echo "Done!"
 
-# Get Gedit (Everyone loves notepad!)
+# Get Nmap and Net-Tools (Everyone loves hacking!)
 
 echo -e "\n== Installing net-tools and nmap =="
 echo "Time to be H4CK3RM4N"
